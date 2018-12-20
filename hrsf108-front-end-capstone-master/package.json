@@ -1,0 +1,20 @@
+{
+  "name": "reviews",
+  "version": "1",
+  "description": "Review module from allrecipes.com",
+  "author": "Joseph Spear",
+  "license": "",
+  "engines": {
+    "node": ">=6.13.0"
+  },
+  "scripts": {
+  },
+  "dependencies": {
+    "mysql":"^2.16.0",
+    "node-random-name":"^1.0.1",
+    "lorem-ipsum":"^1.0.6"
+  },
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+  }
+}

@@ -34,17 +34,17 @@ const generateDate = () => {
   return `${RNG(1,12)}-${RNG(1,29)}-${RNG(1998,2018)}`;
 }
 
-//random image url generator
-
 const createReview = () => {
-  let user_id = Math.random() * 100;
-  let review_num = RNG(0,5);
+  let user_id = RNG(1,100);
+  let recipe_id = RNG(1,100);
+  let rating = RNG(0,5);
   let submitted_date = generateDate();
   let review_text = text({count: RNG(1,3), units:'paragraph'});
   let likes = RNG(0,500);
   return {
     user_id,
-    review_num,
+    recipe_id,
+    rating,
     submitted_date,
     review_text,
     likes  
@@ -53,19 +53,27 @@ const createReview = () => {
 
 const createUser = () => {
   let user_name = randomName();
-  let image_url = 'TBD'; //generateImageUrl();
-  let is_allstar = randomInArray([true,false]);
-  let favorites = RNG(10,200);
-  let recipes_made = RNG(1,100);
+  let image_url = 'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700';
+  let is_allstar = randomInArray(['true','false']);
   let followers = RNG(50,200);
   return {
     user_name,
     image_url,
     is_allstar,
-    favorites,
-    recipes_made,
     followers
   }
+}
+
+const createUserRecipeJoin = () => {
+  let user_id = RNG(1,100);
+  let recipe_id = RNG(1,100);
+  return {user_id, recipe_id};
+}
+
+module.exports = {
+  createReview,
+  createUser,
+  createUserRecipeJoin
 }
 
 /*
@@ -75,10 +83,8 @@ const createUser = () => {
 user:
 
   user_name - random name generator (search for library)
-  image_url - random image from imgur
+  image_url - random image
   is_allstar - true or false
-  favorites - RNG
-  recipes_made - RNG
   followers - RNG
 
 recipe:

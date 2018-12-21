@@ -31,21 +31,21 @@ const RNG = (min,max) => {
 
 //random date generator
 const generateDate = () => {
-  return `${RNG(1,12)}-${RNG(1,29)}-${RNG(1998,2018)}`;
+  return `${RNG(1998,2018)}-${RNG(1,12)}-${RNG(1,29)}`;
 }
 
 const createReview = () => {
   let user_id = RNG(1,100);
   let recipe_id = RNG(1,100);
   let rating = RNG(0,5);
-  let submitted_date = generateDate();
-  let review_text = text({count: RNG(1,3), units:'paragraph'});
+  let submit_date = generateDate();
+  let review_text = text({count: 1, units:'sentence'});
   let likes = RNG(0,500);
   return {
     user_id,
     recipe_id,
     rating,
-    submitted_date,
+    submit_date,
     review_text,
     likes  
   }

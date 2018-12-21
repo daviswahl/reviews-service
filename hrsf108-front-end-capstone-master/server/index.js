@@ -11,7 +11,13 @@ app.listen(7000, () => {
 });
 
 app.get('/', (req,res) => {
-  db.addUser(() => {
+  db.clearAll()
+  .then(db.generateAll())
+  .then(() => {
+    console.log('GENERATED ALL')
     res.status(201).send();
-  });
+  })
+  .catch((err) => {
+    throw new Error(err);
+  })
 });

@@ -17,7 +17,7 @@ CREATE TABLE Reviews (
   recipe_id int NOT NULL,
   rating int NOT NULL,
   submit_date DATE NOT NULL,
-  review_text VARCHAR(255) NOT NULL,
+  review_text LONGTEXT NOT NULL,
   likes int NOT NULL,
   PRIMARY KEY (id)
 );
@@ -36,8 +36,8 @@ CREATE TABLE user_favorited_recipe (
   PRIMARY KEY (id)
 );
 
-ALTER TABLE Reviews ADD FOREIGN KEY (user_id) REFERENCES Users (id);
-ALTER TABLE user_made_recipe ADD FOREIGN KEY (user_id) REFERENCES Users (id);
-ALTER TABLE user_made_recipe ADD FOREIGN KEY (recipe_id) REFERENCES Reviews (id);
-ALTER TABLE user_favorited_recipe ADD FOREIGN KEY (user_id) REFERENCES Users (id);
-ALTER TABLE user_favorited_recipe ADD FOREIGN KEY (recipe_id) REFERENCES Reviews (id);
+-- ALTER TABLE Reviews ADD FOREIGN KEY (user_id) REFERENCES Users (id);
+-- ALTER TABLE user_made_recipe ADD FOREIGN KEY (user_id) REFERENCES Users (id);
+-- ALTER TABLE user_made_recipe ADD FOREIGN KEY (recipe_id) REFERENCES Reviews (id);
+-- ALTER TABLE user_favorited_recipe ADD FOREIGN KEY (user_id) REFERENCES Users (id);
+-- ALTER TABLE user_favorited_recipe ADD FOREIGN KEY (recipe_id) REFERENCES Reviews (id);

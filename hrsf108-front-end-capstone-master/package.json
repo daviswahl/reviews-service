@@ -21,9 +21,10 @@
     "babel-preset-react":"^6.24.1"
   },
     "dependencies": {
-    "mysql": "^2.16.0",
+    "mysql":"^2.16.0",
     "node-random-name": "^1.0.1",
     "lorem-ipsum": "^1.0.6",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "bluebird":"^3.5.3"
   }
 }

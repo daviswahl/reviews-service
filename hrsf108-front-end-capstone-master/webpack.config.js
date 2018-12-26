@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client');
 var DIST_DIR = path.join(__dirname, '/public/dist');
@@ -21,3 +22,14 @@ module.exports = {
     ]
   }
 };
+=======
+const path = require('path');
+
+module.exports = {
+  entry: path.join(__dirname,`/client/index.jsx`),
+  output: {
+    filename: 'bundle.js',
+    path: path.join(__dirname, '/public/dist')
+  }
+};
+>>>>>>> 23e3995060fc931691af53fea543ab1b6cacdcfe

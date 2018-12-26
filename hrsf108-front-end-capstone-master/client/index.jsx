@@ -11,12 +11,14 @@ class App extends React.Component {
       Reviews: [],
       user_favorited_recipe: [],
       user_made_recipe: [],
-      currentReview: {recipe_id: 'loading'},
+      currentReview: {recipe_id: 'loading',review_text: 'loading',submit_date: 'loading'},
       currentUser: null
     }
     this.updateState = this.updateState.bind(this);
     this.getData = this.getData.bind(this);
     this.sortRecipes = this.sortRecipes.bind(this);
+    this.nextReview = this.nextReview.bind(this);
+    this.prevousReview = this.prevousReview.bind(this);
   }
   
   componentDidMount() {
@@ -28,11 +30,23 @@ class App extends React.Component {
     })
   }
   
-  
   updateState(newState) {
     this.setState(newState);
   }
 
+  prevousReview() {
+    let index = this.state.Reviews.indexOf(this.state.currentReview) - 1;
+    index = index === -1 ? this.state.Reviews.length - 1 : index;
+    let currentReview = this.state.Reviews[index];
+    this.updateState({currentReview});
+  }
+
+  nextReview() {
+    let index = this.state.Reviews.indexOf(this.state.currentReview) + 1;
+    index = index === this.state.Reviews.length ? 0 : index;
+    let currentReview = this.state.Reviews[index];
+    this.updateState({currentReview});
+  }
 
   getData(queryString) {
     let update = (data) => {
@@ -47,11 +61,9 @@ class App extends React.Component {
     }
     update = update.bind(this);
     $.get('/Data/' + queryString, update)
-
   }
 
   sortRecipes(key) {
-    //this.setState = {recipes:sortedRecipes}
     let Reviews = this.state.Reviews;
     let sortMethod = (a,b) => {
       if (key === 'help') {
@@ -73,7 +85,10 @@ class App extends React.Component {
       <div>
         <div id='header'>Reviews for {this.state.currentReview.recipe_id}</div>
         <RecipeSort sortRecipes={this.sortRecipes}/>
-        <div>{JSON.stringify(this.state.Reviews)}</div>
+        {/* <User /> <Like /> <Share /> <Rating />*/}
+        <div>{this.state.currentReview.submit_date}</div>
+        <div>{this.state.currentReview.review_text}</div>
+        <span onClick={this.prevousReview}>Previous</span><span onClick={this.nextReview}>Next</span>
       </div>
     );
   }

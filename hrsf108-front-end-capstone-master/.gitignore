@@ -5,7 +5,7 @@
 npm
 npm-debug.log
 node_modules/
-
+v8-compile-cache-0/
 pids
 *.pid
 logs

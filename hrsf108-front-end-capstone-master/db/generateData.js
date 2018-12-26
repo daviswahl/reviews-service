@@ -70,6 +70,15 @@ const createUserRecipeJoin = () => {
   return {user_id, recipe_id};
 }
 
+<<<<<<< HEAD
+const createUserReviewJoin = () => {
+  let user_id = RNG(1,100);
+  let review_id = RNG(1,100);
+  return {user_id, review_id};
+}
+
+=======
+>>>>>>> 23e3995060fc931691af53fea543ab1b6cacdcfe
 module.exports = {
   createReview,
   createUser,

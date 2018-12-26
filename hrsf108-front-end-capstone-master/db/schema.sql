@@ -36,6 +36,16 @@ CREATE TABLE user_favorited_recipe (
   PRIMARY KEY (id)
 );
 
+<<<<<<< HEAD
+CREATE TABLE user_liked_review (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id int NOT NULL,
+  review_id int NOT NULL,
+  PRIMARY KEY (id)
+);
+
+=======
+>>>>>>> 23e3995060fc931691af53fea543ab1b6cacdcfe
 -- ALTER TABLE Reviews ADD FOREIGN KEY (user_id) REFERENCES Users (id);
 -- ALTER TABLE user_made_recipe ADD FOREIGN KEY (user_id) REFERENCES Users (id);
 -- ALTER TABLE user_made_recipe ADD FOREIGN KEY (recipe_id) REFERENCES Reviews (id);

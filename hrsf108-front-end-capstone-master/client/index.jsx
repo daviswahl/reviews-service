@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
 import RecipeSort from './Components/RecipeSort.jsx';
+import Rating from './Components/Rating.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class App extends React.Component {
       Reviews: [],
       user_favorited_recipe: [],
       user_made_recipe: [],
-      currentReview: {recipe_id: 'loading',review_text: 'loading',submit_date: 'loading'},
+      currentReview: {recipe_id: 'loading',review_text: 'loading',submit_date: 'loading',rating:5},
+      currentRecipe: 1,
       currentUser: null
     }
     this.updateState = this.updateState.bind(this);
@@ -55,6 +57,7 @@ class App extends React.Component {
       if(queryString === 'Users') {
         state.currentUser = data[0];
       } else if (queryString === 'Reviews') {
+        state.Reviews = data.filter(review => review.recipe_id === this.state.currentRecipe);
         state.currentReview = data[0];
       }
       this.updateState(state);
@@ -85,7 +88,8 @@ class App extends React.Component {
       <div>
         <div id='header'>Reviews for {this.state.currentReview.recipe_id}</div>
         <RecipeSort sortRecipes={this.sortRecipes}/>
-        {/* <User /> <Like /> <Share /> <Rating />*/}
+        {/* <User /> <Like /> <Share /> */}
+        <Rating rating={this.state.currentReview.rating}/>
         <div>{this.state.currentReview.submit_date}</div>
         <div>{this.state.currentReview.review_text}</div>
         <span onClick={this.prevousReview}>Previous</span><span onClick={this.nextReview}>Next</span>

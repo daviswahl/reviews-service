@@ -36,7 +36,7 @@ const generateDate = () => {
 
 const createReview = () => {
   let user_id = RNG(1,100);
-  let recipe_id = RNG(1,100);
+  let recipe_id = 1;
   let rating = RNG(0,5);
   let submit_date = generateDate();
   let review_text = text({count: 1, units:'sentence'});
@@ -70,19 +70,17 @@ const createUserRecipeJoin = () => {
   return {user_id, recipe_id};
 }
 
-<<<<<<< HEAD
 const createUserReviewJoin = () => {
   let user_id = RNG(1,100);
   let review_id = RNG(1,100);
   return {user_id, review_id};
 }
 
-=======
->>>>>>> 23e3995060fc931691af53fea543ab1b6cacdcfe
 module.exports = {
   createReview,
   createUser,
-  createUserRecipeJoin
+  createUserRecipeJoin,
+  createUserReviewJoin
 }
 
 /*

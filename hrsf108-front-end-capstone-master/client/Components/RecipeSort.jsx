@@ -15,10 +15,10 @@ class RecipeSort extends React.Component {
   render() {
     return (
     <div>
-      <span id='help' class='sort' onClick={this.clickHandler}>Most helpful</span>
-      <span id='pos' class='sort' onClick={this.clickHandler}>Most positive</span>
-      <span id='neg' class='sort' onClick={this.clickHandler}>Least positive</span>
-      <span id='new' class='sort' onClick={this.clickHandler}>Newest</span>
+      <span id='help' className='sort' onClick={this.clickHandler}>Most helpful</span>
+      <span id='pos' className='sort' onClick={this.clickHandler}>Most positive</span>
+      <span id='neg' className='sort' onClick={this.clickHandler}>Least positive</span>
+      <span id='new' className='sort' onClick={this.clickHandler}>Newest</span>
     </div>
     );
   }

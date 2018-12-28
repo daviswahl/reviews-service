@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
-import RecipeSort from './Components/RecipeSort.jsx';
+import User from './Components/User.jsx';
+import ReviewSort from './Components/ReviewSort.jsx';
 import Rating from './Components/Rating.jsx';
+import Share from './Components/Share.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,15 +12,15 @@ class App extends React.Component {
     this.state ={
       Users: [],
       Reviews: [],
-      user_favorited_recipe: [],
-      user_made_recipe: [],
-      currentReview: {recipe_id: 'loading',review_text: 'loading',submit_date: 'loading',rating:5},
+      user_liked_review: false,
+      currentReview: {user_name:'John Doe', recipe_name:'Mac & Cheese', recipe_id: 1,review_text: 'loading',submit_date: 'loading',rating:5,likes:1},
       currentRecipe: 1,
-      currentUser: null
+      currentUser: {user_name:'John Doe', image_url:'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700',
+                    is_allstar:false, followers: 10, favorites: 10, made:10}
     }
     this.updateState = this.updateState.bind(this);
     this.getData = this.getData.bind(this);
-    this.sortRecipes = this.sortRecipes.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
     this.nextReview = this.nextReview.bind(this);
     this.prevousReview = this.prevousReview.bind(this);
   }
@@ -26,7 +28,7 @@ class App extends React.Component {
   componentDidMount() {
     ([
       'Users','Reviews',
-      'user_made_recipe','user_favorited_recipe'
+      'user_liked_review'
     ]).forEach(query => {
       this.getData(query);
     })
@@ -36,29 +38,47 @@ class App extends React.Component {
     this.setState(newState);
   }
 
+  clickLike(){
+    let user_liked_review = true;
+    let currentReview = this.state.currentReview;
+    currentReview.likes++;
+    this.updateState(user_liked_review,currentReview);
+  }
+
   prevousReview() {
     let index = this.state.Reviews.indexOf(this.state.currentReview) - 1;
     index = index === -1 ? this.state.Reviews.length - 1 : index;
     let currentReview = this.state.Reviews[index];
-    this.updateState({currentReview});
+    let currentUser = this.state.Users.filter(user => user.user_name === currentReview.user_name)[0] || currentUser;
+    this.updateState({currentReview, currentUser});
   }
 
   nextReview() {
     let index = this.state.Reviews.indexOf(this.state.currentReview) + 1;
     index = index === this.state.Reviews.length ? 0 : index;
     let currentReview = this.state.Reviews[index];
-    this.updateState({currentReview});
+    let currentUser = this.state.Users.filter(user => user.user_name === currentReview.user_name)[0] || this.state.currentUser;
+    console.log(currentUser);
+    this.updateState({currentReview, currentUser});
   }
 
   getData(queryString) {
     let update = (data) => {
       let state = {};
-      state[queryString] = data;
       if(queryString === 'Users') {
+        state[queryString] = data;
         state.currentUser = data[0];
       } else if (queryString === 'Reviews') {
         state.Reviews = data.filter(review => review.recipe_id === this.state.currentRecipe);
         state.currentReview = data[0];
+      } else if (queryString === 'user_liked_review') {
+        data = data.reduce((isLiked,like) => {
+          if (like.user_id === this.state.currentUser && like.review_id === this.state.currentReview.id) {
+            isLiked = true;
+          }
+          return isLiked;
+        },false);
+        state[queryString] = data;
       }
       this.updateState(state);
     }
@@ -66,7 +86,7 @@ class App extends React.Component {
     $.get('/Data/' + queryString, update)
   }
 
-  sortRecipes(key) {
+  sortReviews(key) {
     let Reviews = this.state.Reviews;
     let sortMethod = (a,b) => {
       if (key === 'help') {
@@ -85,14 +105,30 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <div id='header'>Reviews for {this.state.currentReview.recipe_id}</div>
-        <RecipeSort sortRecipes={this.sortRecipes}/>
-        {/* <User /> <Like /> <Share /> */}
+      <div id='review-display'>
+        <div id='review-header'>
+          <div id='header'>Reviews for: {this.state.currentReview.recipe_name}</div>
+          <ReviewSort sortReviews={this.sortReviews}/>
+        </div>
+        <div className='travel'>
+          <span className='prev' onClick={this.prevousReview}>Previous</span><span className='next' onClick={this.nextReview}>Next</span>
+        </div>
+        
+        <User review={this.state.currentReview} user={this.state.currentUser}/>
+        <div className='user-interact'>  
+          <div className='likes'>
+            <span className='likes-icon'></span>
+            <span className='number-likes'>{this.state.currentReview.likes}</span>
+          </div>
+          <Share />
+        </div>
+        <hr className='line'/>
         <Rating rating={this.state.currentReview.rating}/>
-        <div>{this.state.currentReview.submit_date}</div>
-        <div>{this.state.currentReview.review_text}</div>
-        <span onClick={this.prevousReview}>Previous</span><span onClick={this.nextReview}>Next</span>
+        <span className='submit-date'>{this.state.currentReview.submit_date}</span>
+        <div className='review-text'>{this.state.currentReview.review_text}</div>
+        <div className='travel'>
+          <span className='prev' onClick={this.prevousReview}>Previous</span><span className='next' onClick={this.nextReview}>Next</span>
+        </div>
       </div>
     );
   }

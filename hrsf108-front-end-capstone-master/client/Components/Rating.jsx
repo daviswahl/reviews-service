@@ -13,7 +13,7 @@ var Rating = props => {
   }
 
   return (
-    <div>
+    <div className='rating' >
       {stars}
     </div>
   );

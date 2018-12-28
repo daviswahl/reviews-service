@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ReviewSort extends React.Component {
+class FullReviewSort extends React.Component {
   constructor(props) {
     super(props);
 
@@ -9,7 +9,6 @@ class ReviewSort extends React.Component {
  
   clickHandler(e){
     var key = e.target.id;
-    console.log('KEY: ', key);
     this.props.sortReviews(key);
   }
 
@@ -25,4 +24,4 @@ class ReviewSort extends React.Component {
   }
 }
 
-export default ReviewSort;
+export default FullReviewSort;

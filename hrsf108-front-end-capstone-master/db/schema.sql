@@ -20,7 +20,8 @@ CREATE TABLE Reviews (
   recipe_id int NOT NULL,
   recipe_name TEXT NOT NULL,
   rating int NOT NULL,
-  submit_date TEXT NOT NULL,
+  long_submit_date TEXT NOT NULL,
+  short_submit_date TEXT NOT NULL,
   review_text LONGTEXT NOT NULL,
   likes int NOT NULL,
   PRIMARY KEY (id)

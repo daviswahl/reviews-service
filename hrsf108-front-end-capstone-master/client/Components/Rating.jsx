@@ -6,10 +6,10 @@ var Rating = props => {
   let stars = [];
 
   for (let i = 0; i < filled; i++) {
-    stars.push(<img src='https://images.media-allrecipes.com/ar-images/icons/rating-stars/full-star-2015.svg'/>);
+    stars.push(<img className='star' src='https://images.media-allrecipes.com/ar-images/icons/rating-stars/full-star-2015.svg'/>);
   }
   for (let i = 0; i < empty; i++) {
-    stars.push(<img src='https://images.media-allrecipes.com/ar-images/icons/rating-stars/empty-star.svg'/>);
+    stars.push(<img className='star' src='https://images.media-allrecipes.com/ar-images/icons/rating-stars/empty-star.svg'/>);
   }
 
   return (

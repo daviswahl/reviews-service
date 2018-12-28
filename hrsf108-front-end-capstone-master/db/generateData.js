@@ -31,11 +31,18 @@ const RNG = (min,max) => {
 }
 
 //random date generator
-const generateDate = () => {
+const generateLongDate = () => {
   let start = new Date(2016, 0, 1);
   let end = new Date();
   let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   return moment(date).format('LL');
+}
+
+const generateShortDate = () => {
+  let start = new Date(2016, 0, 1);
+  let end = new Date();
+  let date = new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return moment(date).format('L');
 }
 
 const createReview = () => {
@@ -43,8 +50,9 @@ const createReview = () => {
   let user_name = 'John Doe';
   let recipe_id = 1;
   let recipe_name = 'Mac & Cheese';
-  let rating = RNG(0,5);
-  let submit_date = generateDate();
+  let rating = RNG(1,5);
+  let long_submit_date = generateLongDate();
+  let short_submit_date = generateShortDate();
   let review_text = text({count: 1, units:'sentence'});
   let likes = RNG(0,500);
   return {
@@ -53,7 +61,8 @@ const createReview = () => {
     recipe_id,
     recipe_name,
     rating,
-    submit_date,
+    long_submit_date,
+    short_submit_date,
     review_text,
     likes  
   }

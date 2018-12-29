@@ -8,16 +8,20 @@ import ShortReview from './Components/ShortReview.jsx';
 import RatingBreakdown from './Components/RatingBreakdown.jsx';
 import PageReviewSort from './Components/PageReviewSort.jsx';
 import ReviewGrid from './Components/ReviewGrid.jsx';
+import moment from 'moment';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Users: [],
-      Reviews: [{user_name:'John Doe', recipe_name:'Mac & Cheese', recipe_id: 1,review_text: 'loading',submit_date: 'loading',rating:5,likes:1}],
+      Users: [{user_name:'John Doe', image_url:'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700',
+      is_allstar:false, followers: 0, favorites: 0, made:0}],
+      Reviews: [{user_name:'John Doe', recipe_name:'Mac & Cheese',review_text: 'loading',submit_date: 'loading',rating:5,likes:0}],
       currentUser: {user_name:'John Doe', image_url:'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700',
-                    is_allstar:false, followers: 10, favorites: 10, made:10},
+                    is_allstar:false, followers: 0, favorites: 0, made:0},
       numReviews: '0',
+      mostHelpfulPositiveReview: {user_name:'John Doe', recipe_name:'Mac & Cheese',review_text: 'loading',submit_date: 'loading',rating:0,likes:0},
+      mostHelpfulNegativeReview: {user_name:'John Doe', recipe_name:'Mac & Cheese',review_text: 'loading',submit_date: 'loading',rating:0,likes:0},
       hidden: true
     }
     this.sortReviews = this.sortReviews.bind(this);
@@ -43,6 +47,14 @@ class App extends React.Component {
       if (queryString === 'Users') {
         state.currentUser = data[0];
       } else if (queryString === 'Reviews') {
+        state.mostHelpfulPositiveReview = state.mostHelpfulNegativeReview = data[0];
+        data.forEach(review => {
+          if (review.rating > state.mostHelpfulPositiveReview.rating) {
+            state.mostHelpfulPositiveReview = review;
+          } else if (review.rating < state.mostHelpfulNegativeReview.rating){
+            state.mostHelpfulNegativeReview = review;
+          }
+        });
         state.numReviews = state.Reviews.length.toString();
       }
       this.updateState(state);
@@ -61,7 +73,7 @@ class App extends React.Component {
       } else if (key === 'neg') {
         return a.rating - b.rating;
       } else if (key === 'new') {
-        return b.long_submit_date > a.Long_submit_date ? 1 : -1;
+        return moment(a.short_submit_date).isBefore(b.short_submit_date) ? 1 : -1;
       }
     }
     Reviews.sort(sortMethod);
@@ -82,11 +94,11 @@ class App extends React.Component {
           <div className='highlighted-reviews'>
             <div className='short-review-container'>
               <span className='highlight-header'>Most helpful positive review</span>
-              <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
+              <ShortReview user={this.state.Users[0]} review={this.state.mostHelpfulPositiveReview} />
             </div>
             <div className='short-review-container'>
               <span className='highlight-header'>Most helpful critical review</span>
-              <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
+              <ShortReview user={this.state.Users[this.state.Users.length - 1]} review={this.state.mostHelpfulNegativeReview} />
             </div>
           </div>
           <div className='rating-breakdown'>
@@ -97,7 +109,7 @@ class App extends React.Component {
           <PageReviewSort sortReviews={this.sortReviews} />
         </div>
         <div className='reviews-container'>
-          <ReviewGrid user={this.state.currentUser} chunkedReviews={_.chunk(this.state.hidden ? this.state.Reviews.slice(0,3) : this.state.Reviews,3)}/>
+          <ReviewGrid users={this.state.Users} chunkedReviews={_.chunk(this.state.hidden ? this.state.Reviews.slice(0,3) : this.state.Reviews,3)}/>
         </div>
         <div className='show-more-reviews'>
           <div onClick={this.showMoreReviews} className='show-button'>

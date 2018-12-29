@@ -7,7 +7,7 @@ var ReviewGrid = (props) => (
       {props.chunkedReviews.map(reviews => 
         <tr className='reviews-row'>{reviews.map(review => 
           <td className='reviews-data'>
-              <ShortReview user={props.user} review={review} />
+              <ShortReview user={props.users[Math.floor(Math.random()*props.users.length)]} review={review} />
           </td>)}
         </tr>)}
     </tbody>

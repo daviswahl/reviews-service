@@ -3,13 +3,18 @@ import React from 'react';
 class FullReviewSort extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      selected: null
+    };
     this.clickHandler = this.clickHandler.bind(this);
   }
  
   clickHandler(e){
     var key = e.target.id;
-    this.props.sortReviews(key);
+    if (key !== this.state.selected) {
+      this.props.sortReviews(key);
+      this.setState({selected:key});
+    }
   }
 
   render() {

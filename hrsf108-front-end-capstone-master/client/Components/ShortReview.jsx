@@ -22,11 +22,17 @@ class ShortReview extends React.Component {
       }
     }
     span.onclick = function() {
-      modal.style.display = "none";
-    }
+      modal.animate([{transform: 'translateY(0px)', opacity: 1}, {transform: 'translateY(40px)',opacity: 0}], {duration: 500});
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 500);
+    } 
     window.onclick = function(event) {
       if (event.target == modal) {
-        modal.style.display = "none";
+        modal.animate([{transform: 'translateY(0px)', opacity: 1}, {transform: 'translateY(40px)',opacity: 0}], {duration: 500});
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 500);
       }
     }
   }
@@ -34,7 +40,7 @@ class ShortReview extends React.Component {
   render() {
     return (
     <div className='short-review'>
-    <div className='modal-review' animation='modal'><FullReview /></div>
+    <div className='modal-review'><FullReview /></div>
       <ShortUser user={this.props.user} />
       <div className='rating-and-date'>
         <Rating rating={this.props.review.rating}/>

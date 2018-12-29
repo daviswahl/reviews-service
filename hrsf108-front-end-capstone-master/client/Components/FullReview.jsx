@@ -4,6 +4,7 @@ import User from './User.jsx';
 import FullReviewSort from './ReviewSort.jsx';
 import Rating from './Rating.jsx';
 import Share from './Share.jsx';
+import ShareBlock from './ShareBlock.jsx';
 
 class FullReview extends React.Component {
   constructor(props) {
@@ -11,11 +12,10 @@ class FullReview extends React.Component {
     this.state ={
       Users: [],
       Reviews: [],
-      likes: [],
+      like: false,
+      shareBlock: false,
       likeStyle: {},
       likeIcon: {},
-      shareStyle: {},
-      shareIcon: {},
       currentReview: {user_name:'John Doe', recipe_name:'Mac & Cheese', recipe_id: 1,review_text: 'loading',submit_date: 'loading',rating:5,likes:1},
       currentRecipe: 1,
       currentUser: {user_name:'John Doe', image_url:'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700',
@@ -27,6 +27,7 @@ class FullReview extends React.Component {
     this.nextReview = this.nextReview.bind(this);
     this.prevousReview = this.prevousReview.bind(this);
     this.likeReview = this.likeReview.bind(this);
+    this.showShareBlock = this.showShareBlock.bind(this);
   }
   
   componentDidMount() {
@@ -55,6 +56,7 @@ class FullReview extends React.Component {
     let currentReview = this.state.Reviews[index];
     let currentUser = this.state.Users[index]
     this.updateState({currentReview, currentUser});
+    this.resetLike();
   }
 
   nextReview() {
@@ -63,6 +65,7 @@ class FullReview extends React.Component {
     let currentReview = this.state.Reviews[index];
     let currentUser = this.state.Users[index]
     this.updateState({currentReview, currentUser});
+    this.resetLike();
   }
 
   getData(queryString) {
@@ -106,15 +109,23 @@ class FullReview extends React.Component {
     let currentReview = Reviews[0];
     let currentUser = this.state.Users.sort((a,b) => (2*Math.random() - 1))[0]
     this.setState({Reviews, currentReview, currentUser});
+    this.resetLike();
+  }
+
+  resetLike() {
+    this.setState({
+      like:false,
+      likeStyle:{backgroundColor:'#fff'},
+      likeIcon:{backgroundPosition: '98.66375121477162% 14.193194291986828%'}
+    });
   }
 
   likeReview() {
     if(!this.state.like) {
       let currentReview = this.state.currentReview;
       currentReview.likes++;
-      let likes = this.state.likes.push(currentReview);
       this.setState({currentReview,
-                      likes,
+                      like:true,
                       likeStyle:{backgroundColor:'#ff7e1a'},
                       likeIcon:{backgroundPosition: '98.66375121477162% 21.218441273326015%'}
                     });
@@ -129,7 +140,11 @@ class FullReview extends React.Component {
     } 
   }
 
-
+  showShareBlock() {
+    console.log('SHOW SHARE BLOCK CALLED');
+    var shareBlock = this.state.shareBlock ? false : true;
+    this.setState({shareBlock});
+  }
 
   render() {
     return (
@@ -146,9 +161,10 @@ class FullReview extends React.Component {
               <span style={this.state.likeIcon} className='likes-icon'></span>
               <span className='number-likes'>{this.state.currentReview.likes}</span>
             </div>
-            <Share />
+            <Share showShareBlock={this.showShareBlock}/>
           </div>
         </div>
+        {this.state.shareBlock ? <div className='share-block'> <ShareBlock /> </div>: null}
         <hr className='line'/>
         <div className='full-rating-submit'>
           <div className='full-rating'>
@@ -156,7 +172,9 @@ class FullReview extends React.Component {
           </div>
           <span className='full-submit-date'>{this.state.currentReview.long_submit_date}</span>
         </div>
-        <div className='review-text'>{this.state.currentReview.review_text}</div>
+        <div className='review-text-container'>
+          <div className='review-text'>{this.state.currentReview.review_text}</div>
+        </div>
         <div className='travel'>
           <span className='prev' onClick={this.prevousReview}>Previous</span><span className='next' onClick={this.nextReview}>Next</span>
         </div>

@@ -24,8 +24,10 @@ class PageReviewSort extends React.Component {
  
   clickHandler(e){
     var selected = e.target.id;
-    this.props.sortReviews(selected);
-    this.setState({selected});
+    if(selected !== this.state.selected) {
+      this.props.sortReviews(selected);
+      this.setState({selected});
+    }
   }
 
   render() {

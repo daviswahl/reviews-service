@@ -34,11 +34,11 @@ class RatingBreakdown extends React.Component {
   render() {
     return (
 
-      <div className='rating-breakdown'>
+      <div>
       <ol>
         <li id='rating-header'>{this.props.reviews.length} Ratings</li>
         <li>
-          <div>
+          <div className='rating-breakdown-row'>
             <div className='full-bar'>
               <div className='filled-bar' id='fiveStars'></div>
             </div>
@@ -46,7 +46,7 @@ class RatingBreakdown extends React.Component {
           </div>
         </li>
         <li>
-          <div>
+          <div className='rating-breakdown-row'>
             <div className='full-bar'>
               <div className='filled-bar' id='fourStars'></div>
             </div>
@@ -54,7 +54,7 @@ class RatingBreakdown extends React.Component {
           </div>
         </li>
         <li>
-          <div>
+          <div className='rating-breakdown-row'>
             <div className='full-bar'>
               <div className='filled-bar' id='threeStars'></div>
             </div>
@@ -62,7 +62,7 @@ class RatingBreakdown extends React.Component {
           </div>
         </li>
         <li>
-          <div>
+          <div className='rating-breakdown-row'>
             <div className='full-bar'>
               <div className='filled-bar' id='twoStars'></div>
             </div>
@@ -70,7 +70,7 @@ class RatingBreakdown extends React.Component {
           </div>
         </li>
         <li>
-          <div>
+          <div className='rating-breakdown-row'>
             <div className='full-bar'>
               <div className='filled-bar' id='oneStar'></div>
             </div>

@@ -4,20 +4,30 @@ class Share extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      isSelected: false
+      share: false,
+      shareStyle: {},
+      shareIcon: {}
     };
-    this.clickHandler = this.clickHandler.bind(this);
+    this.clickShare = this.clickShare.bind(this);
   }
 
-  clickHandler() {
-    let isSelected = this.state.isSelected ? false : true;
-    this.setState({isSelected});
+  clickShare() {
+    var shareStyle,shareIcon;
+    if (this.state.share) {
+      shareStyle = {backgroundColor:'#fff', borderColor:'#cfcfcf'};
+      shareIcon = {backgroundPosition: '90.8641975308642% 37.11570709893796%'};
+    } else {
+      shareStyle = {backgroundColor:'#ff7e1a',borderColor:'#ff7e1a'};
+      shareIcon = {backgroundPosition: '98.87996104212321% 28.228195282501364%',transform: 'scale(.9, .9)',position:'absolute'};
+    }
+    let share = this.state.share ? false : true;
+    this.setState({share, shareStyle, shareIcon});
   }
   
   render() {
     return (
-      <div className='share'>
-        <span className='share-icon'></span>
+      <div onClick={this.clickShare} style={this.state.shareStyle} className='share'>
+        <span style={this.state.shareIcon} className='share-icon'></span>
         <span className='share-text'>Share</span>
       </div>
     );

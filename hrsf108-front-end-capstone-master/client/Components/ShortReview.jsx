@@ -10,10 +10,16 @@ class ShortReview extends React.Component {
 
   componentDidMount() {
     var modal = document.getElementsByClassName('modal-review')[0];
-    var btn = document.getElementsByClassName('read-more')[0];
+    var btn1 = document.getElementsByClassName('read-more');
+    var btn2 = document.getElementsByClassName('read-more-text');
     var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-      modal.style.display = "block";
+    for(var i = 0; i < btn1.length; i++){
+      btn1[i].onclick = function() {
+        modal.style.display = "block";
+      }
+      btn2[i].onclick = function() {
+        modal.style.display = "block";
+      }
     }
     span.onclick = function() {
       modal.style.display = "none";

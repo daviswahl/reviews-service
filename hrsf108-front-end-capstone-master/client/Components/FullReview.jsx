@@ -11,7 +11,11 @@ class FullReview extends React.Component {
     this.state ={
       Users: [],
       Reviews: [],
-      user_liked_review: false,
+      likes: [],
+      likeStyle: {},
+      likeIcon: {},
+      shareStyle: {},
+      shareIcon: {},
       currentReview: {user_name:'John Doe', recipe_name:'Mac & Cheese', recipe_id: 1,review_text: 'loading',submit_date: 'loading',rating:5,likes:1},
       currentRecipe: 1,
       currentUser: {user_name:'John Doe', image_url:'https://vignette.wikia.nocookie.net/bojackhorseman/images/d/d2/BoJack_Horsemann.png/revision/latest?cb=20170924222700',
@@ -22,6 +26,7 @@ class FullReview extends React.Component {
     this.sortReviews = this.sortReviews.bind(this);
     this.nextReview = this.nextReview.bind(this);
     this.prevousReview = this.prevousReview.bind(this);
+    this.likeReview = this.likeReview.bind(this);
   }
   
   componentDidMount() {
@@ -103,6 +108,29 @@ class FullReview extends React.Component {
     this.setState({Reviews, currentReview, currentUser});
   }
 
+  likeReview() {
+    if(!this.state.like) {
+      let currentReview = this.state.currentReview;
+      currentReview.likes++;
+      let likes = this.state.likes.push(currentReview);
+      this.setState({currentReview,
+                      likes,
+                      likeStyle:{backgroundColor:'#ff7e1a'},
+                      likeIcon:{backgroundPosition: '98.66375121477162% 21.218441273326015%'}
+                    });
+    } else {
+      let currentReview = this.state.currentReview;
+      currentReview.likes--;
+      this.setState({currentReview,
+                      like:false,
+                      likeStyle:{backgroundColor:'#fff'},
+                      likeIcon:{backgroundPosition: '98.66375121477162% 14.193194291986828%'}
+                    });
+    } 
+  }
+
+
+
   render() {
     return (
       <div id='review-display'>
@@ -111,23 +139,32 @@ class FullReview extends React.Component {
           <FullReviewSort sortReviews={this.sortReviews}/>
           <span className='close'>X</span>
         </div>
-        <div className='travel'>
-          <span className='prev' onClick={this.prevousReview}>Previous</span><span className='next' onClick={this.nextReview}>Next</span>
-        </div>
-        <User review={this.state.currentReview} user={this.state.currentUser}/>
-        <div className='user-interact'>  
-          <div className='likes'>
-            <span className='likes-icon'></span>
-            <span className='number-likes'>{this.state.currentReview.likes}</span>
+        <div className='user-info'>
+          <User review={this.state.currentReview} user={this.state.currentUser}/>
+          <div className='user-interact'>  
+            <div onClick={this.likeReview} style={this.state.likeStyle} className='likes'>
+              <span style={this.state.likeIcon} className='likes-icon'></span>
+              <span className='number-likes'>{this.state.currentReview.likes}</span>
+            </div>
+            <Share />
           </div>
-          <Share />
         </div>
         <hr className='line'/>
-        <Rating rating={this.state.currentReview.rating}/>
-        <span className='submit-date'>{this.state.currentReview.long_submit_date}</span>
+        <div className='full-rating-submit'>
+          <div className='full-rating'>
+            <Rating rating={this.state.currentReview.rating}/>
+          </div>
+          <span className='full-submit-date'>{this.state.currentReview.long_submit_date}</span>
+        </div>
         <div className='review-text'>{this.state.currentReview.review_text}</div>
         <div className='travel'>
           <span className='prev' onClick={this.prevousReview}>Previous</span><span className='next' onClick={this.nextReview}>Next</span>
+        </div>
+        <div onClick={this.previousReview} className='left-paddle'>
+          <span className='left-arrow'></span>
+        </div>
+        <div onClick={this.nextReview} className='right-paddle'>
+          <span className='right-arrow'></span>
         </div>
       </div>
     );

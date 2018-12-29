@@ -78,18 +78,21 @@ class App extends React.Component {
       <div className='review-page'>
         <Header numReviews={this.state.numReviews} />
         <RateAndReview image_url={this.state.currentUser.image_url} />
-        <div className='short-review-container'>
-          <span>Most helpful positive review</span>
-          <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
+        <div className='review-preview'>
+          <div className='highlighted-reviews'>
+            <div className='short-review-container'>
+              <span className='highlight-header'>Most helpful positive review</span>
+              <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
+            </div>
+            <div className='short-review-container'>
+              <span className='highlight-header'>Most helpful critical review</span>
+              <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
+            </div>
+          </div>
+          <div className='rating-breakdown'>
+            <RatingBreakdown reviews={this.state.Reviews} />
+          </div>
         </div>
-        <div className='short-review-container'>
-          <span>Most helpful critical review</span>
-          <ShortReview user={this.state.currentUser} review={this.state.Reviews[0]} />
-        </div>
-        <div className='rating-breakdown'>
-          <RatingBreakdown reviews={this.state.Reviews} />
-        </div>
-        <div className='divider'></div>
         <div className='page-sort-container'>
           <PageReviewSort sortReviews={this.sortReviews} />
         </div>

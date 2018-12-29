@@ -40,12 +40,10 @@
   font-size: 1rem;
   font-family: "Source Sans Pro",Arial;
   width: 792px;
-  transform: translateY(0);
   height: auto;
   margin: 0 auto 0.5rem auto;
   min-height: 613px;
   position: relative;
-  transform: translateY(0);
   opacity: 1;
 }
 
@@ -66,7 +64,6 @@
 
 .user {
   display: inline-block;
-  padding-top: 1rem;
   width: 80%;
   color: #2d2d2d;
   align-items: center;
@@ -85,6 +82,7 @@
 }
 
 .rating {
+  margin-left: 10px;
   display: inline-block;
   width: 88px;
   height: 16px;
@@ -95,6 +93,16 @@
 .star {
   display: inline-block;
   height: 16px;
+}
+
+.full-rating-submit {
+
+}
+
+.full-rating {
+  transform: scale(1.5,1.5);
+  float: left;
+  margin-left: 10px;
 }
 
 .sort {
@@ -242,12 +250,20 @@ float: none;
   display: inline;
   font-style: italic;
   font-weight: 300;
+}
 
+.full-submit-date {
+  font-size: .875rem;
+  color: gray;
+  margin-left: 20px;
+  vertical-align: middle;
+  display: inline;
+  font-style: italic;
+  font-weight: 300;
 }
 
 .review-text {
   line-height: 21px;
-
   font-size: 1rem;
   margin: 0 0 1rem;
   display: block;
@@ -256,10 +272,14 @@ float: none;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-family: "Source Sans Pro",Arial;
+}
 
+.rating-breakdown-row {
+  height:25px;
 }
 
 .line {
+  width:95%;
   font-size: 1rem;
   color: #2d2d2d;
   font-family: "Source Sans Pro",Arial;
@@ -274,6 +294,10 @@ float: none;
   margin-inline-end: auto;
   overflow: hidden;
   font-weight: 300;
+}
+
+.user-info {
+  height: 75px;
 }
 
 .share-text {
@@ -302,12 +326,12 @@ float: none;
 }
 
 .share {
+  margin-right: 10px;
   display: block;
   float: right;
   height: 34px;
-  position: relative;
+  position: absolute;
   right: 0;
-  top: 74px;
   width: 34px;
   line-height: 42px;
   text-align: center;
@@ -345,11 +369,11 @@ float: none;
 }
 
 .likes {
+  margin-right: 10px;
   display: block;
   float: right;
   height: 34px;
-  margin-top: 14px;
-  position: relative;
+  position: absolute;
   right: 40px;
   width: 34px;
   justify-content: center;
@@ -363,6 +387,8 @@ float: none;
 
 .user-interact {
   display: inline-block;
+  width: 20%;
+
 }
 
 .review-page {
@@ -498,7 +524,7 @@ float: none;
   margin-left: 2.5%;
   margin-right: 0%;
   margin-top: 25px;
-  width: 30%;
+  width: 40%;
   position: relative;
 }
 
@@ -507,7 +533,6 @@ float: none;
   background-color: transparent;
   padding-bottom: 0;
   float: left;
-  padding: 1.5rem 1% 1.5rem 0;
   position: relative;
   width: 100%;
   display: block;
@@ -561,7 +586,7 @@ ol {
   padding: 0;
   float: right;
   margin: 1rem 0.5rem 0 0;
-  width: 33%;
+  width: 100%;
 }
 
 .full-bar {
@@ -579,18 +604,14 @@ ol {
   position: relative;
   top: -1.2rem;
   margin-left: 59%;
+  width: 30%;
+  display: inline-block;
 }
 
-.divider {
-  margin-left: 0;
-  clear: none;
-  float: left;
-  margin-right: 0%;
-  margin-top: 25px;
-  position: relative;
-  width: 100%;
-  height: 100px;
-  display: block;
+.rating-breakdown {
+  display: inline-block;
+  width: 30%;
+  float:right;
 }
 
 .page-sort-container {
@@ -619,11 +640,15 @@ ol {
 .reviews-table {
   box-sizing: border-box;
   height:100%;
+  display: inline-block;
 }
 
 .reviews-data {
-  height: 30%;
-  width:30%;
+  height: 200px;
+  padding-left: 10%;
+  padding-bottom: 5%;
+  width: 30%;
+  max-width: 225px;
 }
 
 .show-more-reviews {
@@ -650,4 +675,73 @@ ol {
   margin-top: 30px;
   max-width: 300px;
   cursor: pointer;
+}
+
+.highlighted-reviews {
+  width: 50%;
+  display: inline-block;
+}
+
+.review-preview {
+  width:100%;
+  margin-bottom: 250px;
+}
+
+.highlight-header {
+  margin-top: 0;
+  font-size: 1.0625rem;
+  color: #2e2e2e;
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.left-paddle {
+  height: 185px;
+  top: 200px;
+  width: 77px;
+  left: -77px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+}
+
+.left-arrow {
+  border-style: solid;
+  border-width: 0.18em 0.18em 0 0;
+  color: #b2b2b2;
+  content: '';
+  display: inline-block;
+  height: 0.75rem;
+  position: relative;
+  vertical-align: top;
+  width: 0.77rem;
+  transform: rotate(-135deg);
+  margin-left: 25px;
+  margin-top: 102px;
+}
+
+.right-paddle {
+  height: 185px;
+  top: 200px;
+  width: 77px;
+  left: 792px;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+}
+
+.right-arrow {
+  border-style: solid;
+  border-width: 0.18em 0.18em 0 0;
+  color: #b2b2b2;
+  content: '';
+  display: inline-block;
+  height: 0.75rem;
+  position: relative;
+  vertical-align: top;
+  width: 0.77rem;
+  transform: rotate(45deg);
+  margin-left: 14px;
+  margin-top: 102px;
 }

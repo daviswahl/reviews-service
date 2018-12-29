@@ -60,7 +60,7 @@ class App extends React.Component {
       this.updateState(state);
     }
     update = update.bind(this);
-    $.get('/Data/' + queryString, update)
+    $.get('/Data/' + queryString, update);
   }
 
   sortReviews(key) {
@@ -121,4 +121,5 @@ class App extends React.Component {
   }
 }
 
+export default App;
 ReactDom.render(<App />, document.getElementById('app'));

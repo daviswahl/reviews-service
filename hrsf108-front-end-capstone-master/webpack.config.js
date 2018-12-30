@@ -15,9 +15,11 @@ module.exports = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015','env','transform-class-properties', 'syntax-class-properties']
+          presets: ['react', 'es2015','env']
         }
       }
     ]
   }
 };
+
+// ,'transform-class-properties', 'syntax-class-properties'

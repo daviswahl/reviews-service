@@ -19,11 +19,11 @@ class AddReview extends React.Component {
           <span className='your-rating-text'>Love it!</span>
           <div className='your-rating-stars'><Rating rating={5} /></div>
         </div>
-        <label className='user-review-label' for='user-review'>Your review(optional)</label>
+        <label className='user-review-label' htmlFor='user-review'>Your review(optional)</label>
         <textarea id='user-review' placeholder='Did you make any changes, and will you make it again?'></textarea>
         <div className='add-photo'>
-          <span class='picture-icon'></span>
-          <span class='add-picture-text'>Add Photo</span>
+          <span className='picture-icon'></span>
+          <span className='add-picture-text'>Add Photo</span>
         </div>
         <div className='cancel-or-submit'>
           <a className='cancel'>Cancel</a>

@@ -141,7 +141,6 @@ class FullReview extends React.Component {
   }
 
   showShareBlock() {
-    console.log('SHOW SHARE BLOCK CALLED');
     var shareBlock = this.state.shareBlock ? false : true;
     this.setState({shareBlock});
   }

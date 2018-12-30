@@ -14,6 +14,22 @@
   animation: modal 0.5s;
 }
 
+.modal-add {
+  display: none;
+  padding-bottom: 160px;
+  padding-top: 160px;
+  box-sizing: border-box;
+  background-color: rgba(0,0,0,0.5);
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10000;
+  animation: modal 0.5s;
+}
+
 @keyframes modal {
   from {
     transform: translateY(40px);
@@ -531,6 +547,7 @@ float: none;
   text-align: center;
   vertical-align: middle;
   width: 244px;
+  cursor: pointer;
 }
 
 .review-bubble::before {
@@ -956,4 +973,172 @@ ol {
   white-space: nowrap;
   cursor: pointer;
   line-height: 40px;
+}
+
+.add-review {
+  height: auto;
+  width: 450px;
+  color: #444;
+  margin: 0 auto;
+  max-width: 100%;
+  position: relative;
+  background: #fff;
+}
+
+.add-header-text {
+  font-size: 1.375rem;
+  border-bottom: solid 1px #e6e6e6;
+  color: #666;
+  font-weight: 300;
+  padding: 1rem;
+  margin: 0;
+}
+
+.your-rating-header {
+  font-weight: 400;
+  font-size: 1rem;
+  font-style: italic;
+  left: 1rem;
+  position: absolute;
+}
+
+.your-rating-text {
+  font-size: .875rem;
+  color: gray;
+  font-style: italic;
+  left: 170px;
+  position: absolute;
+}
+
+.your-rating-stars {
+  margin-left: 70px;
+  margin-bottom: 15px;
+  float: left;
+  transform: scale(3,3);
+  padding-top: 1.2rem;
+}
+
+.user-review-label {
+  font-weight: 400;
+  margin: 1.5rem 0.8rem 0.5rem;
+  clear: both;
+  float: left;
+  font-style: italic;
+}
+
+#user-review {
+  overflow: auto;
+  border: solid 1px #cfcfcf;
+  height: 10rem;
+  margin: 0.5rem auto 0.75rem;
+  border-radius: 0;
+  display: block;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.25rem 0.5rem;
+  resize: none;
+  width: 95%;
+}
+
+.add-photo {
+  cursor: pointer;
+  align-items: center;
+  background-color: #4d4d4d !important;
+  border-radius: 4px;
+  color: #fff;
+  display: flex;
+  height: 35px;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  width: 140px;
+}
+
+.picture-icon {
+  background-image: url(sprite.css.svg);
+  background-size: initial;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  transform: scale(.75, .75);
+  width: 46px;
+  height: 46px;
+  background-position: 0 80.23255813953489%;
+  color: #fff;
+}
+
+.cancel-or-submit {
+  width: 90%;
+  clear: both;
+  content: '';
+  display: table;
+  background-color: #fff;
+  margin-left: 10px;
+  padding: 0 10px 10px;
+}
+
+.cancel {
+  border-radius: 5px;
+  position: static;
+  width: 40%;
+  border-right: solid 1px #fff;
+  font-size: 1rem;
+  background-color: #b3b3b3;
+  height: 3.125rem;
+  line-height: 3.125rem;
+  border: 0 none;
+  color: #fff;
+  display: inline-block;
+  max-width: 459px;
+  padding: 0 5%;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.submit {
+  background-color: #ff7e1a;
+  border-radius: 5px;
+  position: static;
+  clear: right;
+  border-right: 0;
+  width: 40%;
+  cursor: pointer;
+  text-align: center;
+  white-space: nowrap;
+  color: #fff;
+  display: inline-block;
+  max-width: 459px;
+  padding: 0 5%;
+  border: 0 none;
+  height: 3.125rem;
+  line-height: 3.125rem;
+  font-size: 1rem;
+}
+
+.close-add-review {
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: transparent;
+  color: #999;
+  font-size: 1.5rem;
+  font-weight: normal;
+  height: 30px;
+  line-height: 26px;
+  position: absolute;
+  right: 3px;
+  text-align: center;
+  top: 14px;
+  width: 30px;
+}
+
+.close-add-review::before {
+  text-align: center;
+  top: 14px;
+  width: 30px;
+  content: "×";
+  cursor: pointer;
 }

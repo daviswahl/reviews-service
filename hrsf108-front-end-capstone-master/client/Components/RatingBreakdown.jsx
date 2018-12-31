@@ -41,7 +41,6 @@ class RatingBreakdown extends React.Component {
 
   render() {
     return (
-
       <div>
       <ol>
         <li id='rating-header'>{this.props.reviews.length} Ratings</li>

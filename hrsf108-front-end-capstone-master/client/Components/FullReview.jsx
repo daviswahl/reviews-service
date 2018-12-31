@@ -69,7 +69,11 @@ class FullReview extends React.Component {
   }
 
   getData(queryString) {
-    let update = (data) => {
+    /*
+      I would create a plain javascript class for interacting with the api so that you don't need
+      all this messy logic in your viewmodels.
+    */
+      let update = (data) => {
       let state = {};
       if(queryString === 'Users') {
         state[queryString] = data;

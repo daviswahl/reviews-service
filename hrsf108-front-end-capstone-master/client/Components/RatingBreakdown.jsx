@@ -14,6 +14,7 @@ class RatingBreakdown extends React.Component {
     this.getPercentages();
   }
 
+  /* this isn't working correctly in the UI and could definitely be done better */
   getPercentages() {
     let reviews = this.props.reviews;
     let percentages = {
